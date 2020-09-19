@@ -29,4 +29,27 @@ function fillArray(arr, qty) {
 
 fillArray(wizards, 4);
 
-console.log(wizards);
+var setupSimilar = document.querySelector(".setup-similar");
+var setupSimilarList = document.querySelector(".setup-similar-list");
+var similarWizardsTemplate = document.querySelector("#similar-wizard-template").content.querySelector(".setup-similar-item");
+
+var renderWizard = function (wizard) {
+  var wizardElement = similarWizardsTemplate.cloneNode(true);
+  wizardElement.querySelector(".setup-similar-label").textContent = wizard.name;
+  wizardElement.querySelector(".wizard-coat").style.fill = wizard.coatColor;
+  wizardElement.querySelector(".wizard-eyes").style.fill = wizard.eyesColor;
+
+  return wizardElement;
+};
+
+
+
+var fragment = document.createDocumentFragment();
+
+for (var i = 0; i < wizards.length; i++) {
+    fragment.appendChild(renderWizard(wizards[i]));
+}
+
+setupSimilarList.appendChild(fragment);
+setupSimilar.classList.remove("hidden");
+
